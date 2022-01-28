@@ -24,26 +24,26 @@ KV = '''
     padding: "8dp"
     spacing: "8dp"
 
-    AnchorLayout:
-        anchor_x: "left"
-        size_hint_y: None
-        height: avatar.height
+    # AnchorLayout:
+    #     anchor_x: "left"
+    #     size_hint_y: None
+    #     height: avatar.height
+    # 
+    #     Image:
+    #         id: avatar
+    #         size_hint: None, None
+    #         size: "56dp", "56dp"
+    #         source: "data/logo/kivy-icon-256.png"
 
-        Image:
-            id: avatar
-            size_hint: None, None
-            size: "56dp", "56dp"
-            source: "data/logo/kivy-icon-256.png"
-
-    MDLabel:
-        text: "KivyMD library"
-        font_style: "Button"
-        adaptive_height: True
-
-    MDLabel:
-        text: "kivydevelopment@gmail.com"
-        font_style: "Caption"
-        adaptive_height: True
+    # MDLabel:
+    #     text: "Main"
+    #     font_style: "Button"
+    #     adaptive_height: True
+    # 
+    # MDLabel:
+    #     text: "kivydevelopment@gmail.com"
+    #     font_style: "Caption"
+    #     adaptive_height: True
 
     ScrollView:
 
