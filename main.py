@@ -17,6 +17,7 @@ kv = """
         theme_text_color: "Custom"
         text_color: root.text_color
 
+
 <ContentNavigationDrawer>:
     orientation: "vertical"
     # padding: "8dp"
@@ -44,32 +45,26 @@ kv = """
     #     adaptive_height: True
 
     ScrollView:
-
         DrawerList:
             id: md_list
             ItemDrawer:
                 icon: 'star'
                 text: 'Main'
-                on_press:
+                on_release:
                     app.root.ids.nav_drawer.set_state("close")
                     app.root.ids.sm.current = "main_screen"
-
             ItemDrawer:
                 icon: 'youtube'
                 text: 'Video Player Configuration'
-                on_press:
+                on_release:
                     app.root.ids.nav_drawer.set_state("close")
                     app.root.ids.sm.current = "video_config_screen"
-
             ItemDrawer:
                 icon: 'midi-port'
                 text: 'MIDI Configuration'
             ItemDrawer:
                 icon: 'midi-port'
                 text: 'Midi Monitor'
-            
-
-
 
 BoxLayout:
     orientation: 'vertical'
