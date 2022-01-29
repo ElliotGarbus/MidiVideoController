@@ -6,23 +6,21 @@ from kivymd.theming import ThemableBehavior
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.list import OneLineIconListItem, MDList
 
-KV = '''
+kv = """
 # Menu item in the DrawerList list.
 <ItemDrawer>:
     theme_text_color: "Custom"
     on_release: self.parent.set_color_item(self)
-
     IconLeftWidget:
         id: icon
         icon: root.icon
         theme_text_color: "Custom"
         text_color: root.text_color
 
-
 <ContentNavigationDrawer>:
     orientation: "vertical"
-    padding: "8dp"
-    spacing: "8dp"
+    # padding: "8dp"
+    # spacing: "8dp"
 
     # AnchorLayout:
     #     anchor_x: "left"
@@ -49,26 +47,52 @@ KV = '''
 
         DrawerList:
             id: md_list
+            ItemDrawer:
+                icon: 'star'
+                text: 'Main'
+                on_press:
+                    app.root.ids.nav_drawer.set_state("close")
+                    app.root.ids.sm.current = "main_screen"
+
+            ItemDrawer:
+                icon: 'youtube'
+                text: 'Video Player Configuration'
+                on_press:
+                    app.root.ids.nav_drawer.set_state("close")
+                    app.root.ids.sm.current = "video_config_screen"
+
+            ItemDrawer:
+                icon: 'midi-port'
+                text: 'MIDI Configuration'
+            ItemDrawer:
+                icon: 'midi-port'
+                text: 'Midi Monitor'
+            
 
 
 
-MDScreen:
+BoxLayout:
+    orientation: 'vertical'
+    MDToolbar:
+        title: "MIDI Video Controller"
+        elevation: 10
+        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
 
     MDNavigationLayout:
-
+        
         ScreenManager:
-
+            id: sm
             MDScreen:
-
+                name: 'main_screen'
                 MDBoxLayout:
                     orientation: 'vertical'
-
-                    MDToolbar:
-                        title: "Navigation Drawer"
-                        elevation: 10
-                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
-
-                    Widget:
+                    MDLabel:
+                        text: 'Main Screen'
+            MDScreen:
+                name: 'video_config_screen'
+                MDLabel:
+                    text: 'Video Config Screen' 
+                    
 
 
         MDNavigationDrawer:
@@ -76,7 +100,7 @@ MDScreen:
 
             ContentNavigationDrawer:
                 id: content_drawer
-'''
+"""
 
 
 class ContentNavigationDrawer(MDBoxLayout):
@@ -100,23 +124,24 @@ class DrawerList(ThemableBehavior, MDList):
         instance_item.text_color = self.theme_cls.primary_color
 
 
-class TestNavigationDrawer(MDApp):
+class MidiVideoControllerApp(MDApp):
     def build(self):
-        return Builder.load_string(KV)
+        self.title = 'MIDI Video Controller V0.0'
+        return Builder.load_string(kv)
 
-    def on_start(self):
-        icons_item = {
-            "folder": "My files",
-            "account-multiple": "Shared with me",
-            "star": "Starred",
-            "history": "Recent",
-            "checkbox-marked": "Shared with me",
-            "upload": "Upload",
-        }
-        for icon_name in icons_item.keys():
-            self.root.ids.content_drawer.ids.md_list.add_widget(
-                ItemDrawer(icon=icon_name, text=icons_item[icon_name])
-            )
+    # def on_start(self):
+    #     icons_item = {
+    #         "folder": "My files",
+    #         "account-multiple": "Shared with me",
+    #         "star": "Starred",
+    #         "history": "Recent",
+    #         "checkbox-marked": "Shared with me",
+    #         "upload": "Upload",
+    #     }
+    #     for icon_name in icons_item.keys():
+    #         self.root.ids.content_drawer.ids.md_list.add_widget(
+    #             ItemDrawer(icon=icon_name, text=icons_item[icon_name])
+    #         )
 
 
-TestNavigationDrawer().run()
+MidiVideoControllerApp().run()
